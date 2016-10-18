@@ -3,14 +3,20 @@
   'use strict';
 
   angular
-    .module('myApp.components.main', [])
+    .module('myApp.components.main', ['bitCoin'])
     .controller('mainController', mainController);
 
-  mainController.$inject = ['$scope'];
+  mainController.$inject = ['$scope', 'bitCoinService'];
 
-  function mainController($scope) {
-    /*jshint validthis: true */
-    this.greeting = 'Hello World!';
+  function mainController($scope, bitCoinService) {
+    this.cryptoData = {}
+    this.bitCoinAPI = function (url) {
+      bitCoinService.bitCoinLog(url)
+      .then((data) => {
+        console.log(data)
+      })
+
+    }
   }
 
 })();
